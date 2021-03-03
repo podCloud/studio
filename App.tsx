@@ -1,21 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+/* eslint-disable react/style-prop-object */
+import React from "react";
+import {
+  ApplicationProvider,
+  Button,
+  Divider,
+  Layout,
+  TopNavigation,
+} from "@ui-kitten/components";
+import { StyleSheet, Text } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import * as eva from "@eva-design/eva";
 
 const styles = StyleSheet.create({
-  container: {
+  layout: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  container: {
+    paddingHorizontal: 10,
+    paddingVertical: 20,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
+
+const HomeScreen = (): JSX.Element => {
+  return (
+    <Layout style={styles.layout}>
+      <TopNavigation title="podCloud Studio" />
+      <Divider />
+      <Layout level="1" style={styles.container}>
+        <Button>Test</Button>
+        <Text>I&apos;m starting to build my project !</Text>
+        <StatusBar style="auto" />
+      </Layout>
+    </Layout>
+  );
+};
+
+const App = (): JSX.Element => {
+  return (
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <ApplicationProvider {...eva} theme={eva.light}>
+      <HomeScreen />
+    </ApplicationProvider>
+  );
+};
+
+export default App;
