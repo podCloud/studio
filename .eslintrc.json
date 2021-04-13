@@ -30,6 +30,12 @@
     "import/extensions": ["error", "never"],
     "react/prop-types": 0,
     "no-shadow": "off",
+    "react/style-prop-object": [
+      1,
+      {
+        "allow": ["StatusBar"]
+      }
+    ],
     "@typescript-eslint/no-shadow": ["error"],
     "@typescript-eslint/explicit-module-boundary-types": "off"
   },

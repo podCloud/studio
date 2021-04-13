@@ -1,49 +1,35 @@
-/* eslint-disable react/style-prop-object */
 import React from "react";
-import {
-  ApplicationProvider,
-  Button,
-  Divider,
-  Layout,
-  TopNavigation,
-} from "@ui-kitten/components";
-import { StyleSheet, Text } from "react-native";
-import { StatusBar } from "expo-status-bar";
+
+import { ApplicationProvider, IconRegistry } from "@ui-kitten/components";
 import * as eva from "@eva-design/eva";
 
-const styles = StyleSheet.create({
-  layout: {
-    flex: 1,
-  },
-  container: {
-    paddingHorizontal: 10,
-    paddingVertical: 20,
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+import { EvaIconsPack } from "@ui-kitten/eva-icons";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
-const HomeScreen = (): JSX.Element => {
-  return (
-    <Layout style={styles.layout}>
-      <TopNavigation title="podCloud Studio" />
-      <Divider />
-      <Layout level="1" style={styles.container}>
-        <Button>Test</Button>
-        <Text>I&apos;m starting to build my project !</Text>
-        <StatusBar style="auto" />
-      </Layout>
-    </Layout>
-  );
-};
+import theme from "./theme";
+import AppNavigator from "./navigators/AppNavigator";
+
+const apolloClient = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: "http://api.githunt.com/graphql",
+});
 
 const App = (): JSX.Element => {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <HomeScreen />
-    </ApplicationProvider>
+    <ApolloProvider client={apolloClient}>
+      <SafeAreaProvider style={{ overflow: "hidden" }}>
+        <StatusBar style="auto" />
+        <IconRegistry icons={EvaIconsPack} />
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        <ApplicationProvider {...eva} theme={theme}>
+          <AppNavigator />
+        </ApplicationProvider>
+      </SafeAreaProvider>
+      \
+    </ApolloProvider>
   );
 };
 
