@@ -1,29 +1,12 @@
 import React from "react";
-import {
-  Divider,
-  Icon,
-  IconProps,
-  Layout,
-  List,
-  ListItem,
-  Text,
-  TopNavigation,
-  TopNavigationAction,
-} from "@ui-kitten/components";
+import { Layout, List, ListItem, Text } from "@ui-kitten/components";
 
 import { SafeAreaView } from "react-native-safe-area-context";
-import { DrawerNavigationProp } from "@react-navigation/drawer";
-import {
-  ActivityIndicator,
-  RefreshControl,
-  StyleSheet,
-  useWindowDimensions,
-} from "react-native";
+import { ActivityIndicator, RefreshControl, StyleSheet } from "react-native";
 
 import { ScrollView } from "react-native-gesture-handler";
 
 import { gql, useQuery, QueryResult } from "@apollo/client";
-import { AppNavigatorParamList } from "../navigators/AppNavigator";
 
 const styles = StyleSheet.create({
   view: { flex: 1 },
@@ -150,36 +133,9 @@ const FeedView = () => {
   );
 };
 
-type DashboardNavigationProps = DrawerNavigationProp<
-  AppNavigatorParamList,
-  "Podcasts"
->;
-
-type PodcastsScreenProps = { navigation: DashboardNavigationProps };
-
-const PodcastsScreen = ({ navigation }: PodcastsScreenProps): JSX.Element => {
-  const dimensions = useWindowDimensions();
-
-  /* eslint-disable-next-line react/jsx-props-no-spreading */
-  const MenuIcon = (props: IconProps) => <Icon {...props} name="menu" />;
-
+const PodcastsScreen = (): React.ReactNode => {
   return (
     <SafeAreaView style={styles.view}>
-      <TopNavigation
-        title="Podcasts"
-        alignment="center"
-        accessoryLeft={
-          dimensions.width >= 1200
-            ? null
-            : () => (
-                <TopNavigationAction
-                  icon={MenuIcon}
-                  onPress={() => navigation.openDrawer()}
-                />
-              )
-        }
-      />
-      <Divider />
       <Layout style={styles.layout}>
         <FeedView />
       </Layout>

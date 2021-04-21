@@ -16,7 +16,7 @@ const apolloClient = new ApolloClient({
   uri: "http://api.githunt.com/graphql",
 });
 
-const App = (): JSX.Element => {
+const App = (): React.ReactNode => {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <ApolloProvider client={apolloClient}>
